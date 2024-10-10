@@ -1,0 +1,9 @@
+{
+   "tb_name": "default_tb",
+   "agents": [
+      {"name": "apb", "driver": true, "monitor": "true","sequencer": "true" },
+      {"name": "module2", "type": "monitor"}
+   ],
+   "interface": "my_interface"
+
+}
