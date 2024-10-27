@@ -2,35 +2,34 @@ import json
 from jinja2 import Environment, FileSystemLoader
 
 
-# קריאת קובץ הקונפיגורציה JSON
+# Read JSON File
 def load_config(file_path):
     with open(file_path, 'r') as f:
         return json.load(f)
 
-
-# פונקציה שמייצרת קוד SV על בסיס תבנית Jinja2
+# A function that generates SV code based on the Jinja2 template
 def generate_sv_code(config, template_path, output_path):
-    # טוען את התבנית ממערכת הקבצים
+    # Loads the template from the file system
     env = Environment(loader=FileSystemLoader('templates'))
     template = env.get_template(template_path)
 
-    # הפקת הקוד מתוך התבנית על בסיס ההגדרות
+    # Generating the code from the template based on the settings
     rendered_code = template.render(config)
 
-    # שמירת הקוד שנוצר לקובץ פלט
+    # Saving the generated code to an output file
     with open(output_path, 'w') as f:
         f.write(rendered_code)
     print(f"SV code generated and saved to {output_path}")
 
 
-# מסלול לקובץ הקונפיגורציה
+# Path to the configuration file
 config_file = 'config.json'
-# שם התבנית (שנמצאת בתקיית 'templates')
+# Template name
 template_file = 'sv_temp.sv'
-# שם קובץ הפלט
+# Output file Name
 output_file = 'output.sv'
 
-# קריאה והפעלת הסקריפט
+# Reading and running the script
 if __name__ == "__main__":
-    config = load_config(config_file)  # טוען את הקונפיגורציה
-    generate_sv_code(config, template_file, output_file)  # מפיק את קובץ ה-SV
+    config = load_config(config_file)
+    generate_sv_code(config, template_file, output_file)

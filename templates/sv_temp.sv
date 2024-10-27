@@ -1,4 +1,4 @@
-module {{ env_name }}_env;
+module _env;
    {{ interface }} {{ interface }}_inst();
 
    // Creating the environment components

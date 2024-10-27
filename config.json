@@ -1,8 +1,10 @@
 {
-  "env_name": "default_env",
-  "modules": [
+  "agent_name": "default_env",
+  "agents": [
     {"name": "module1", "type": "driver"},
     {"name": "module2", "type": "monitor"}
   ],
-  "interface": "my_interface"
+  "if_name": "my_interface",
+  "pkt_name": "pkt"
+
 }
