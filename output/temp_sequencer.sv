@@ -1,8 +1,8 @@
-class {{ agent_name }}_sequencer extends uvm_sequencer #({{ agent_name }}_packet);
+class yapp_sequencer extends uvm_sequencer #(yapp_packet);
 
-  {{ agent_name }}_packet  packet;  
+  yapp_packet  packet;  
 
-  `uvm_component_utils({{ agent_name }}_sequencer)
+  `uvm_component_utils(yapp_sequencer)
 
   function new(string name, uvm_component parent);   
     super.new(name, parent);     // important!!
@@ -13,6 +13,5 @@ class {{ agent_name }}_sequencer extends uvm_sequencer #({{ agent_name }}_packet
     `uvm_info(get_type_name(), {"start of simulation for ", get_full_name()}, UVM_HIGH)
   endfunction : start_of_simulation_phase
 
-endclass : {{ agent_name }}_sequencer
-
+endclass : yapp_sequencer
 

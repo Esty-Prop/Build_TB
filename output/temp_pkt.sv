@@ -1,9 +1,21 @@
-class {{ agent_name }}_packet extends uvm_sequence_item;
+class yapp_packet extends uvm_sequence_item;
 
   // Physical Data
-    {% for signal in signals %}
-   rand bit {{ signal.size }}  {{ signal.name }};
-    {% endfor %}
+    
+   rand bit [ADDR_WIDTH-1:0]  PADDR;
+    
+   rand bit [DATA_WIDTH-1:0]  PRDATA;
+    
+   rand bit [DATA_WIDTH-1:0]  PWDATA;
+    
+   rand bit   PWRITE;
+    
+   rand bit   PREADY;
+    
+   rand bit   PSEL;
+    
+   rand bit   PENABLE;
+    
 
   // Control Knobs
 
@@ -15,7 +27,7 @@ class {{ agent_name }}_packet extends uvm_sequence_item;
   `uvm_object_utils_end
 
   // Constructor - required syntax for UVM automation and utilities
-  function new (string name = "{{ agent_name }}_packet");
+  function new (string name = "yapp_packet");
     super.new(name);
   endfunction : new
 
@@ -25,5 +37,4 @@ class {{ agent_name }}_packet extends uvm_sequence_item;
   // Constrain for mostly GOOD_PARITY packets
   //constraint default_parity { parity_type dist {BAD_PARITY := 1, GOOD_PARITY := 5}; }
 
-endclass : {{ agent_name }}_packet
-
+endclass : yapp_packet

@@ -1,3 +1,5 @@
+
+
 class {{ agent_name }}_monitor extends uvm_monitor;
 
     virtual interface {{ if_name }} vif;

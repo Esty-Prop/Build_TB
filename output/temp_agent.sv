@@ -1,11 +1,11 @@
-class {{ agent_name }}_agent extends uvm_agent;
+class yapp_agent extends uvm_agent;
 
-    {{ agent_name }}_driver driver;
-    {{ agent_name }}_monitor monitor;
-    {{ agent_name }}_sequencer sequencer;
+    yapp_driver driver;
+    yapp_monitor monitor;
+    yapp_sequencer sequencer;
 
     // Component macro
-    `uvm_component_utils_begin({{ agent_name }}_agent)
+    `uvm_component_utils_begin(yapp_agent)
         `uvm_field_enum(uvm_active_passive_enum, is_active, UVM_ALL_ON)
     `uvm_component_utils_end
 
@@ -17,10 +17,10 @@ class {{ agent_name }}_agent extends uvm_agent;
       // UVM build_phase
    virtual function void build_phase(uvm_phase phase);
        super.build_phase(phase);
-       monitor = {{ agent_name }}_monitor::type_id::create("monitor", this);
+       monitor = yapp_monitor::type_id::create("monitor", this);
        if (is_active == UVM_ACTIVE) begin
-           sequencer = {{ agent_name }}_sequencer::type_id::create("sequencer", this);
-           driver = {{ agent_name }}_driver::type_id::create("driver", this);
+           sequencer = yapp_sequencer::type_id::create("sequencer", this);
+           driver = yapp_driver::type_id::create("driver", this);
        end
    endfunction : build_phase
 
@@ -29,4 +29,4 @@ class {{ agent_name }}_agent extends uvm_agent;
         driver.seq_item_port.connect(sequencer.seq_item_export);
     endfunction : connect_phase
 
-endclass : {{ agent_name }}_agent
+endclass : yapp_agent

@@ -1,10 +1,10 @@
-class {{ agent_name }}_base_seq extends uvm_sequence#({{ agent_name }}_packet);
+class yapp_base_seq extends uvm_sequence#(yapp_packet);
 
   // Required macro for sequences automation
-  `uvm_object_utils({{ agent_name }}_base_seq)
+  `uvm_object_utils(yapp_base_seq)
 
   // Constructor
-  function new(string name="{{ agent_name }}_base_seq");
+  function new(string name="yapp_base_seq");
     super.new(name);
   endfunction
 
@@ -36,50 +36,49 @@ class {{ agent_name }}_base_seq extends uvm_sequence#({{ agent_name }}_packet);
     end
   endtask : post_body
 
-endclass : {{ agent_name }}_base_seq
+endclass : yapp_base_seq
 
 
-// SEQUENCE: {{ agent_name }}_5_packets
+// SEQUENCE: yapp_5_packets
 //-----------------------------------------------------------------------------
-class {{ agent_name }}_5_packets extends {{ agent_name }}_base_seq;
+class yapp_5_packets extends yapp_base_seq;
 
   // Required macro for sequences automation
-  `uvm_object_utils({{ agent_name }}_5_packets)
+  `uvm_object_utils(yapp_5_packets)
 
   // Constructor
-  function new(string name="{{ agent_name }}_5_packets");
+  function new(string name="yapp_5_packets");
     super.new(name);
   endfunction
 
   // Sequence body definition
   virtual task body();
-    `uvm_info(get_type_name(), "Executing {{ agent_name }}_5_packets sequence", UVM_LOW)
+    `uvm_info(get_type_name(), "Executing yapp_5_packets sequence", UVM_LOW)
      repeat(5)
       `uvm_do(req)
   endtask
 
-endclass : {{ agent_name }}_5_packets
+endclass : yapp_5_packets
 
 
 // SEQUENCE: Manual sending
 //------------------------------------------------------------------------------
 
-class {{ agent_name }}_2_seq extends {{ agent_name }}_base_seq;
+class yapp_2_seq extends yapp_base_seq;
 
   // Required macro for sequences automation
-  `uvm_object_utils({{ agent_name }}_2_seq)
+  `uvm_object_utils(yapp_2_seq)
 
   // Constructor
-  function new(string name="{{ agent_name }}_2_seq");
+  function new(string name="yapp_2_seq");
     super.new(name);
   endfunction
 
   // Sequence body definition
   virtual task body();
-    `uvm_info(get_type_name(), "Executing {{ agent_name }}_INCR_PAYLOAD_SEQ", UVM_LOW)
+    `uvm_info(get_type_name(), "Executing yapp_INCR_PAYLOAD_SEQ", UVM_LOW)
     `uvm_create(req)
     assert(req.randomize());
     `uvm_send(req)
   endtask
-endclass : {{ agent_name }}_2_seq
-
+endclass : yapp_2_seq

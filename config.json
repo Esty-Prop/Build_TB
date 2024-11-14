@@ -1,10 +1,49 @@
 {
-  "agent_name": "default_env",
-  "agents": [
-    {"name": "module1", "type": "driver"},
-    {"name": "module2", "type": "monitor"}
-  ],
-  "if_name": "my_interface",
-  "pkt_name": "pkt"
+  "agent_name": "yapp",
+  "local_params": [
+    {
+      "name":"DATA_WIDTH",
+      "size": 32
+    },
+    {
+      "name":"ADDR_WIDTH",
+      "size":4
+    }],
+  "signals": [
+    {
+      "name":"PADDR",
+      "size": "[ADDR_WIDTH-1:0]",
+      "dut_dir": "input"
 
+    },
+    {
+      "name":"PRDATA",
+      "size": "[DATA_WIDTH-1:0]",
+      "dut_dir": "output"
+
+    },
+    {
+      "name":"PWDATA",
+      "size":"[DATA_WIDTH-1:0]",
+      "dut_dir": "input"
+    },
+    {
+       "name":"PWRITE",
+      "dut_dir": "input"
+    },
+    {
+       "name":"PREADY",
+       "dut_dir": "output"
+    },
+    {
+       "name":"PSEL",
+      "dut_dir": "input"
+    },
+    {
+       "name":"PENABLE",
+      "dut_dir": "input"
+    }
+  ],
+  "record_transaction": true,
+  "rst_active_high": false
 }

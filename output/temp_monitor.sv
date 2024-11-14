@@ -1,11 +1,11 @@
 
 
-class {{ agent_name }}_monitor extends uvm_monitor;
+class yapp_monitor extends uvm_monitor;
 
-    virtual interface {{ agent_name }}_if vif;
+    virtual interface yapp_if vif;
 
     // Collected Data handle
-    {{ pkt_name }} pkt_col;
+     pkt_col;
 
     // Count packets collected
     int num_pkt_col;
@@ -14,7 +14,7 @@ class {{ agent_name }}_monitor extends uvm_monitor;
     //uvm_analysis_port#(yapp_packet) item_collected_port;
 
     // component macro
-    `uvm_component_utils_begin({{ agent_name }}_monitor)
+    `uvm_component_utils_begin(yapp_monitor)
         `uvm_field_int(num_pkt_col, UVM_ALL_ON)
     `uvm_component_utils_end
 
@@ -23,7 +23,7 @@ class {{ agent_name }}_monitor extends uvm_monitor;
     endfunction : new
 
      function void connect_phase (uvm_phase phase);
-        if (! {{ agent_name }}_vif_config::get(
+        if (! yapp_vif_config::get(
             this, get_full_name(), "vif",vif) )
             `uvm_error(get_full_name(), "Missing virtual I/F")
 
@@ -37,19 +37,29 @@ class {{ agent_name }}_monitor extends uvm_monitor;
 
         forever begin
             // Create collected packet instance
-            pkt_col = {{ agent_name }}_pkt ::type_id::create("pkt_col", this);
+            pkt_col = yapp_pkt ::type_id::create("pkt_col", this);
 
             // concurrent blocks for packet collection and transaction recording
             fork
 
                 vif.collect_packet(
-                    {% for signal in signals %}
-              .{{ signal.name | lower }}( pkt_col.{{ signal.name | lower }}){% if not loop.last %},
-               {% endif -%}
-                {% endfor %}
+                    
+              .paddr( pkt_col.paddr),
+               
+              .prdata( pkt_col.prdata),
+               
+              .pwdata( pkt_col.pwdata),
+               
+              .pwrite( pkt_col.pwrite),
+               
+              .pready( pkt_col.pready),
+               
+              .psel( pkt_col.psel),
+               
+              .penable( pkt_col.penable)
                 );
                 // trigger transaction at start of packet
-                @(posedge vif.monstart) void'(begin_tr(pkt_col, "Monitor_{{ agent_name }}_Packet"));
+                @(posedge vif.monstart) void'(begin_tr(pkt_col, "Monitor_yapp_Packet"));
             join
 
             // End transaction recording
@@ -62,7 +72,7 @@ class {{ agent_name }}_monitor extends uvm_monitor;
 
       // UVM report_phase
     function void report_phase(uvm_phase phase);
-        `uvm_info(get_type_name(), $sformatf("Report: {{ agent_name }} Monitor Collected %0d Packets", num_pkt_col), UVM_LOW)
+        `uvm_info(get_type_name(), $sformatf("Report: yapp Monitor Collected %0d Packets", num_pkt_col), UVM_LOW)
     endfunction : report_phase
 
-endclass : {{ agent_name }}_monitor
+endclass : yapp_monitor

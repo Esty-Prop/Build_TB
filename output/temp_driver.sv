@@ -20,9 +20,9 @@ class yapp_driver extends uvm_driver #(yapp_packet);
       `uvm_error("NOVIF",{"virtual interface must be set for: ",get_full_name(),".vif"})
   endfunction: connect_phase
 
-  // start_of_simulation
+  // start_of_simulation 
   function void start_of_simulation_phase(uvm_phase phase);
-    `uvm_info(get_type_name(), {"start of simulation for ", get_full_name()}, UVM_HIGH)
+    `uvm_info(get_type_name(), {"start of simulation for ", get_full_name()}, UVM_HIGH) 
   endfunction : start_of_simulation_phase
 
   // UVM run_phase
@@ -33,7 +33,7 @@ class yapp_driver extends uvm_driver #(yapp_packet);
     join
   endtask : run_phase
 
-  // Gets packets from the sequencer and passes them to the driver.
+  // Gets packets from the sequencer and passes them to the driver. 
   task get_and_drive();
     @(posedge vif.rst);
     @(negedge vif.rst);
@@ -43,7 +43,7 @@ class yapp_driver extends uvm_driver #(yapp_packet);
       seq_item_port.get_next_item(req);
 
       `uvm_info(get_type_name(), $sformatf("Sending Packet :\n%s", req.sprint()), UVM_HIGH)
-
+       
       fork
         // send packet
         begin
@@ -69,7 +69,7 @@ class yapp_driver extends uvm_driver #(yapp_packet);
 
   // rst all TX signals
   task rst_signals();
-    forever
+    forever 
      vif.yapp_rst();
   endtask : rst_signals
 
